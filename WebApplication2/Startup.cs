@@ -26,10 +26,7 @@ namespace WebApplication2
             services.AddScoped<IDbInitializer, WeatherForecastDbInitializer>();
             services.AddDbContext<WeatherForecastDb>(x =>
             {
-                //x.UseSqlite("Filename=PromocodeFactoryAdministrationDb.sqlite");
-                x.UseNpgsql("Server=localhost;Port=5432;Database=WeatherForecastDb;User=postgres;Password=postgres;");
-                //x.UseSnakeCaseNamingConvention();
-                //x.UseLazyLoadingProxies();
+                x.UseNpgsql("Server=localhost;Port=5432;Database=WeatherForecastDb;UserName=postgres;Password=postgres;");
             });
         }
 

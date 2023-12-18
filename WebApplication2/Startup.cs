@@ -24,9 +24,10 @@ namespace WebApplication2
             services.AddSwaggerGen();
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IDbInitializer, WeatherForecastDbInitializer>();
+            
             services.AddDbContext<WeatherForecastDb>(x =>
             {
-                x.UseNpgsql("Server=localhost;Port=5432;Database=WeatherForecastDb;UserName=postgres;Password=postgres;");
+                x.UseNpgsql("Server=host.docker.internal;Port=5432;Database=WeatherForecastDb;UserName=postgres;Password=postgres;");
             });
         }
 

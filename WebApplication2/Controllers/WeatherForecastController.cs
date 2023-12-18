@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebApplication2.DataAccess.Context;
 
 namespace WebApplication2.Controllers
 {
@@ -12,22 +13,18 @@ namespace WebApplication2.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly WeatherForecastDb _dataContext;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherForecastDb dataContext)
         {
             _logger = logger;
+            _dataContext = dataContext;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return _dataContext.WeatherForecasts;
         }
     }
 }
